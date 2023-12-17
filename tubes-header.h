@@ -4,8 +4,14 @@
 #define first(L) L.first
 #define info(L) L->info
 #define next(L) L->next
-
+#define relation(L) L->relation
+#define nextPatient(L) L->nextPatient
 using namespace std;
+
+// ADDRESS
+typedef struct doctorElement* doctorAddress;
+typedef struct relation* relationAddress;
+typedef struct patientElement* patientAddress;
 
 // DOCTOR
 struct doctor
@@ -14,12 +20,11 @@ struct doctor
     int experiences_year;
 };
 
-typedef struct doctorElement* doctorAddress;
-
 struct doctorElement
 {
     doctor info;
     doctorAddress next;
+    relationAddress relation;
 };
 
 struct doctorList
@@ -45,12 +50,11 @@ struct patient
     int age;
 };
 
-typedef struct patientElement* patientAddress;
-
 struct patientElement
 {
     patient info;
     patientAddress next;
+    relationAddress relation;
 };
 
 struct patientList
@@ -71,8 +75,13 @@ void patientDeleteAfter(patientList &L, patientAddress prec, patientAddress P);
 // RELATION
 struct relation
 {
-    doctorAddress nextDoctor;
+    char info;
     patientAddress nextPatient;
+    relationAddress next;
 };
+
+relationAddress createRelation(char info);
+void insertRelation(doctorList parent, string str, relationAddress P);
+void showRelationFromParent(doctorAddress parent);
 
 #endif // TUBES-HEADER_H_INCLUDED

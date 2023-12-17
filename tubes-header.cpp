@@ -270,3 +270,48 @@ void showPatientList(patientList PL)
         p = next(p);
     }
 }
+
+// RELATION
+relationAddress createRelation(char info)
+{
+    relationAddress r = new relation;
+    info(r) = info;
+    next(r) = NULL;
+    nextPatient(r) = NULL;
+
+    return r;
+}
+
+void insertRelation(doctorList parent, string str, relationAddress P)
+{
+    doctorAddress da = findDoctor(parent, str);
+
+    if (da != NULL)
+    {
+        relationAddress ra = relation(da);
+
+        if (ra == NULL)
+        {
+            relation(da) = P;
+        }
+        else
+        {
+            while (next(ra) != NULL)
+            {
+                ra = next(ra);
+            }
+            next(ra) = P;
+            nextPatient(ra) = NULL;
+        }
+    }
+}
+
+void showRelationFromParent(doctorAddress parent)
+{
+    relationAddress p = relation(parent);
+    while (p != NULL)
+    {
+        cout << info(p) << endl;
+        p = next(p);
+    }
+}

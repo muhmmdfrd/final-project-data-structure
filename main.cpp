@@ -12,7 +12,8 @@ int main()
     d1.str = "str-01";
     d1.speciality = "dentist";
     d1.experiences_year = 10;
-    insertDoctor(DL, createDoctor(d1));
+    doctorAddress cd1 = createDoctor(d1);
+    insertDoctor(DL, cd1);
 
     doctor d2 = doctor();
     d2.name = "doctor 2";
@@ -94,4 +95,13 @@ int main()
     cout << endl;
     cout << "after delete nik-02:" << endl;
     showPatientList(PL);
+
+    // insert relation
+    insertRelation(DL, "str-01", createRelation('A'));
+    insertRelation(DL, "str-01", createRelation('B'));
+    insertRelation(DL, "str-01", createRelation('C'));
+
+    doctor parent_1 = info(cd1);
+    cout << "relasi dari dokter dengan nama " << parent_1.name << ": " << endl;
+    showRelationFromParent(cd1);
 }
