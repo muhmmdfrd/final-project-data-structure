@@ -104,4 +104,15 @@ int main()
     doctor parent_1 = info(cd1);
     cout << "relasi dari dokter dengan nama " << parent_1.name << ": " << endl;
     showRelationFromParent(cd1);
+
+    connectToPatient(DL, "str-01", PL, "nik-03");
+    connectToPatient(DL, "str-01", PL, "nik-01");
+
+    cout << "pasien dari dokter dengan nama " << parent_1.name << ": " << endl;
+    showPatientFromDoctor(DL, "str-01");
+
+    doctorAddress find_lagi = findDoctor(DL, "str-01");
+    deleteDoctor(DL, find_lagi);
+    showRelationFromParent(find_lagi);
 }
+

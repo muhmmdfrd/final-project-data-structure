@@ -51,7 +51,7 @@ doctorAddress findDoctor(doctorList DL, string str)
     return NULL;
 }
 
-void deleteDoctor(doctorList &DL, doctorAddress P)
+void deleteDoctor(doctorList &DL, doctorAddress &P)
 {
     if (first(DL) != NULL)
     {
@@ -68,6 +68,7 @@ void deleteDoctor(doctorList &DL, doctorAddress P)
             doctorAddress prec = P;
             doctorDeleteAfter(DL, prec, P);
         }
+        P = NULL;
     }
 
 }
@@ -186,7 +187,7 @@ patientAddress findPatient(patientList PL, string nik)
     return NULL;
 }
 
-void deletePatient(patientList &PL, patientAddress P)
+void deletePatient(patientList &PL, patientAddress &P)
 {
     if (first(PL) != NULL)
     {
@@ -203,6 +204,7 @@ void deletePatient(patientList &PL, patientAddress P)
             patientAddress prec = P;
             patientDeleteAfter(PL, prec, P);
         }
+        P = NULL;
     }
 }
 
@@ -309,10 +311,66 @@ void insertRelation(doctorList parent, string str, relationAddress P)
 
 void showRelationFromParent(doctorAddress parent)
 {
-    relationAddress p = relation(parent);
-    while (p != NULL)
+    if (parent != NULL)
     {
-        cout << info(p) << endl;
-        p = next(p);
+        relationAddress p = relation(parent);
+        while (p != NULL)
+        {
+            cout << info(p) << endl;
+            p = next(p);
+        }
+    }
+}
+
+void connectToPatient(doctorList parent, string str, patientList child, string nik)
+{
+    doctorAddress da = findDoctor(parent, str);
+    patientAddress pa = findPatient(child, nik);
+
+    if (da != NULL && pa != NULL)
+    {
+        relationAddress ra = relation(da);
+
+        if (ra == NULL)
+        {
+            cout << "Relasi tidak ditemukan." << endl;
+        }
+        else
+        {
+            relationAddress temp = NULL;
+            bool is_found = false;
+            while (ra != NULL && !is_found)
+            {
+                if (nextPatient(ra) == NULL)
+                {
+                    temp = ra;
+                    is_found = true;
+                }
+                ra = next(ra);
+            }
+            nextPatient(ra) = pa;
+        }
+    }
+}
+
+void showPatientFromDoctor(doctorList DL, string str)
+{
+    doctorAddress doc = findDoctor(DL, str);
+
+    if (doc != NULL)
+    {
+        relationAddress p = relation(doc);
+        while (p != NULL)
+        {
+            patientAddress temp = nextPatient(p);
+
+            while (temp != NULL)
+            {
+                patient data = info(temp);
+                cout << data.nik << " " << data.name << " " << data.gender << " " << data.age << endl;
+                temp = next(temp);
+            }
+            p = next(p);
+        }
     }
 }
