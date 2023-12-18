@@ -85,5 +85,11 @@ void insertRelation(doctorList parent, string str, relationAddress P);
 void showRelationFromParent(doctorAddress parent);
 void connectToPatient(doctorList parent, string str, patientList child, string nik);
 void showPatientFromDoctor(doctorList DL, string str);
+relationAddress findRelation(doctorList parent, string str, patientList child, string nik);
+void deleteRelation(doctorList parent, string str, patientList child, string nik);
+int countRelationByParent(doctorList DL, string str);
+void showCountRelationAllParent(doctorList DL);
+int countRelationByChild(doctorList DL, patientList PL, string nik);
+int countChildHaveNotRelationship(patientList PL);
 
 #endif // TUBES-HEADER_H_INCLUDED
