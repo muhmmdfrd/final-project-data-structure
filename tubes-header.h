@@ -36,7 +36,7 @@ void createListDoctor(doctorList &DL);
 doctorAddress createDoctor(doctor d);
 void insertDoctor(doctorList &DL, doctorAddress P);
 doctorAddress findDoctor(doctorList DL, string str);
-void deleteDoctor(doctorList &DL, doctorAddress P);
+void deleteDoctor(doctorList &DL, doctorAddress &P);
 void showDoctorList(doctorList DL);
 void doctorDeleteFirst(doctorList &L, doctorAddress P);
 void doctorDeleteLast(doctorList &L, doctorAddress P);
@@ -66,7 +66,7 @@ void createListPatient(patientList &PL);
 patientAddress createPatient(patient p);
 void insertPatient(patientList &PL, patientAddress P);
 patientAddress findPatient(patientList PL, string nik);
-void deletePatient(patientList &PL, patientAddress P);
+void deletePatient(patientList &PL, patientAddress &P);
 void showPatientList(patientList PL);
 void patientDeleteFirst(patientList &L, patientAddress P);
 void patientDeleteLast(patientList &L, patientAddress P);
@@ -83,5 +83,13 @@ struct relation
 relationAddress createRelation(char info);
 void insertRelation(doctorList parent, string str, relationAddress P);
 void showRelationFromParent(doctorAddress parent);
+void connectToPatient(doctorList parent, string str, patientList child, string nik);
+void showPatientFromDoctor(doctorList DL, string str);
+relationAddress findRelation(doctorList parent, string str, patientList child, string nik);
+void deleteRelation(doctorList parent, string str, patientList child, string nik);
+int countRelationByParent(doctorList DL, string str);
+void showCountRelationAllParent(doctorList DL);
+int countRelationByChild(doctorList DL, patientList PL, string nik);
+int countChildHaveNotRelationship(patientList PL);
 
 #endif // TUBES-HEADER_H_INCLUDED

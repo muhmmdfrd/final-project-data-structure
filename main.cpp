@@ -104,4 +104,18 @@ int main()
     doctor parent_1 = info(cd1);
     cout << "relasi dari dokter dengan nama " << parent_1.name << ": " << endl;
     showRelationFromParent(cd1);
+
+    connectToPatient(DL, "str-01", PL, "nik-03");
+    connectToPatient(DL, "str-01", PL, "nik-01");
+
+    relationAddress rr = findRelation(DL, "str-01", PL, "nik-01");
+
+    cout << "hei " << info(rr) << endl;
+
+    cout << "jumlah: " << endl << countRelationByParent(DL, "str-01");
+
+    showCountRelationAllParent(DL);
+
+    cout << "jumlah relasi child nik-01: " << countRelationByChild(DL, PL, "nik-01");
 }
+
