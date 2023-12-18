@@ -12,6 +12,7 @@ doctorAddress createDoctor(doctor d)
     doctorElement* el = new doctorElement;
     info(el) = d;
     next(el) = NULL;
+    relation(el) = NULL;
     return el;
 }
 
