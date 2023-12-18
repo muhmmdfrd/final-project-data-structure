@@ -274,6 +274,79 @@ void showPatientList(patientList PL)
     }
 }
 
+void showDoctorByPatient(doctorList DL, patientList PL)
+{
+    bool patientOfThisDoctor = false;
+    patientAddress p = first(PL);
+
+    while (p != NULL)
+    {
+        doctorAddress d = first(DL);
+
+        cout << "list doctor of patient " << info(p).name << ":" << endl;
+        while (d != NULL)
+        {
+            patientOfThisDoctor = false;
+            relationAddress r = relation(d);
+
+            while (r != NULL)
+            {
+                if (nextPatient(r) == p)
+                {
+                    patientOfThisDoctor = true;
+                }
+                r = next(r);
+            }
+
+            if (patientOfThisDoctor)
+            {
+                cout << "- "<< info(d).name << endl;
+            }
+
+            d = next(d);
+        }
+
+
+        p = next(p);
+    }
+}
+
+void showDoctorByPatient(doctorList DL, patientList PL, string nik)
+{
+    bool patientOfThisDoctor = false;
+
+    patientAddress p = findPatient(PL, nik);
+
+    if (p == NULL)
+    {
+        return;
+    }
+
+    doctorAddress d = first(DL);
+    cout << "list doctor of patient " << info(p).name << ":" << endl;
+    while (d != NULL)
+    {
+        patientOfThisDoctor = false;
+        relationAddress r = relation(d);
+
+        while (r != NULL)
+        {
+            if (nextPatient(r) == p)
+            {
+                patientOfThisDoctor = true;
+            }
+            r = next(r);
+        }
+
+        if (patientOfThisDoctor)
+        {
+            cout << "- "<< info(d).name << endl;
+        }
+
+        d = next(d);
+    }
+}
+
 // RELATION
 relationAddress createRelation(char info)
 {
@@ -460,4 +533,39 @@ int countRelationByChild(doctorList DL, patientList PL, string nik)
     return counter;
 }
 
-int countChildHaveNotRelationship(patientList PL);
+int countChildHaveNotRelationship(patientList PL, doctorList DL)
+{
+    int counter = 0;
+    bool childHasRelation = false;
+    patientAddress p = first(PL);
+
+    while (p != NULL)
+    {
+        childHasRelation = false;
+        doctorAddress d = first(DL);
+
+        while (d != NULL)
+        {
+            relationAddress r = relation(d);
+
+            while (r != NULL)
+            {
+                if (nextPatient(r) == p)
+                {
+                    childHasRelation = true;
+                }
+                r = next(r);
+            }
+            d = next(d);
+        }
+
+        if (childHasRelation == false)
+        {
+            counter++;
+        }
+
+        p = next(p);
+    }
+
+    return counter;
+}

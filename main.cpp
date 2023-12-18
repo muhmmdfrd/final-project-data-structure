@@ -40,14 +40,14 @@ int main()
 
     doctorAddress da1 = findDoctor(DL, "str-02");
 
-    if (da1 == NULL)
-    {
-        cout << "str-02 not found" << endl;
-    }
-    else
-    {
-        deleteDoctor(DL, da1);
-    }
+//    if (da1 == NULL)
+//    {
+//        cout << "str-02 not found" << endl;
+//    }
+//    else
+//    {
+//        deleteDoctor(DL, da1);
+//    }
 
     cout << endl;
     cout << "after delete str-02:" << endl;
@@ -79,18 +79,32 @@ int main()
     p3.age = 18;
     insertPatient(PL, createPatient(p3));
 
+    patient p4 = patient();
+    p4.nik = "nik-04";
+    p4.name = "patient 04";
+    p4.gender = 'P';
+    p4.age = 31;
+    insertPatient(PL, createPatient(p4));
+
+    patient p5 = patient();
+    p5.nik = "nik-05";
+    p5.name = "patient 05";
+    p5.gender = 'P';
+    p5.age = 69;
+    insertPatient(PL, createPatient(p5));
+
     showPatientList(PL);
 
     patientAddress pa1 = findPatient(PL, "nik-02");
 
-    if (pa1 == NULL)
-    {
-        cout << "nik-02 not found" << endl;
-    }
-    else
-    {
-        deletePatient(PL, pa1);
-    }
+//    if (pa1 == NULL)
+//    {
+//        cout << "nik-02 not found" << endl;
+//    }
+//    else
+//    {
+//        deletePatient(PL, pa1);
+//    }
 
     cout << endl;
     cout << "after delete nik-02:" << endl;
@@ -101,21 +115,40 @@ int main()
     insertRelation(DL, "str-01", createRelation('B'));
     insertRelation(DL, "str-01", createRelation('C'));
 
+    insertRelation(DL, "str-02", createRelation('D'));
+
+    insertRelation(DL, "str-04", createRelation('E'));
+    insertRelation(DL, "str-04", createRelation('F'));
+
     doctor parent_1 = info(cd1);
     cout << "relasi dari dokter dengan nama " << parent_1.name << ": " << endl;
     showRelationFromParent(cd1);
 
     connectToPatient(DL, "str-01", PL, "nik-03");
+    connectToPatient(DL, "str-01", PL, "nik-02");
     connectToPatient(DL, "str-01", PL, "nik-01");
 
-    relationAddress rr = findRelation(DL, "str-01", PL, "nik-01");
+    connectToPatient(DL, "str-02", PL, "nik-02");
 
-    cout << "hei " << info(rr) << endl;
+    connectToPatient(DL, "str-04", PL, "nik-05");
+    connectToPatient(DL, "str-04", PL, "nik-04");
 
-    cout << "jumlah: " << endl << countRelationByParent(DL, "str-01");
+//    relationAddress rr = findRelation(DL, "str-01", PL, "nik-01");
+//
+//    cout << "hei " << info(rr) << endl;
+//
+//    cout << "jumlah: " << countRelationByParent(DL, "str-01");
+//
+//    showCountRelationAllParent(DL);
+//
+//    cout << "jumlah relasi child nik-01: " << countRelationByChild(DL, PL, "nik-01") << endl;
 
-    showCountRelationAllParent(DL);
+    cout << "jumlah child tanpa relasi: " << countChildHaveNotRelationship(PL, DL) << endl;
 
-    cout << "jumlah relasi child nik-01: " << countRelationByChild(DL, PL, "nik-01");
+    showDoctorByPatient(DL, PL);
+
+    cout << "divider" << endl;
+
+    showDoctorByPatient(DL, PL, "nik-02");
 }
 

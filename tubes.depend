@@ -1,13 +1,13 @@
 # depslib dependency file v1.0
-1702812936 source:c:\users\user\downloads\tel-u\struktur data\tp\tubes\main.cpp
+1702914257 source:c:\users\user\downloads\tel-u\struktur data\tp\tubes\main.cpp
 	<iostream>
 	"tubes-header.h"
 
-1702812950 source:c:\users\user\downloads\tel-u\struktur data\tp\tubes\tubes-header.cpp
+1702915043 source:c:\users\user\downloads\tel-u\struktur data\tp\tubes\tubes-header.cpp
 	<iostream>
 	"tubes-header.h"
 
-1702812870 c:\users\user\downloads\tel-u\struktur data\tp\tubes\tubes-header.h
+1702914923 c:\users\user\downloads\tel-u\struktur data\tp\tubes\tubes-header.h
 	"string"
 
 1702891698 source:c:\users\muhmm\onedrive\documents\cpp\final-project-data-structure\main.cpp

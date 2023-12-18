@@ -71,6 +71,8 @@ void showPatientList(patientList PL);
 void patientDeleteFirst(patientList &L, patientAddress P);
 void patientDeleteLast(patientList &L, patientAddress P);
 void patientDeleteAfter(patientList &L, patientAddress prec, patientAddress P);
+void showDoctorByPatient(doctorList DL, patientList PL);
+void showDoctorByPatient(doctorList DL, patientList PL, string nik);
 
 // RELATION
 struct relation
@@ -90,6 +92,6 @@ void deleteRelation(doctorList parent, string str, patientList child, string nik
 int countRelationByParent(doctorList DL, string str);
 void showCountRelationAllParent(doctorList DL);
 int countRelationByChild(doctorList DL, patientList PL, string nik);
-int countChildHaveNotRelationship(patientList PL);
+int countChildHaveNotRelationship(patientList PL, doctorList DL);
 
 #endif // TUBES-HEADER_H_INCLUDED
