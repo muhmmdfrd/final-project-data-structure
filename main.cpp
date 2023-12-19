@@ -111,7 +111,8 @@ int main()
     showPatientList(PL);
 
     // insert relation
-    insertRelation(DL, "str-01", createRelation('A'));
+    relationAddress cra = createRelation('A');
+    insertRelation(DL, "str-01", cra);
     insertRelation(DL, "str-01", createRelation('B'));
     insertRelation(DL, "str-01", createRelation('C'));
 
@@ -150,5 +151,23 @@ int main()
     cout << "divider" << endl;
 
     showDoctorByPatient(DL, PL, "nik-02");
+
+    relationAddress rara = findRelation(DL, "str-01", PL, "nik-02");
+
+    cout << info(rara) << endl;
+
+    deleteRelation(DL, "str-01", PL, "nik-02");
+
+    doctor parent_11 = info(cd1);
+    cout << "relasi dari dokter dengan nama " << parent_11.name << ": " << endl;
+
+    cout << "before: " << endl;
+    showDoctorByPatient(DL, PL);
+    cout << endl;
+
+    changeRelationToPatient(DL, "str-04", PL, "nik-04", "nik-02");
+
+    cout << "after: " << endl;
+    showDoctorByPatient(DL, PL);
 }
 

@@ -93,5 +93,9 @@ int countRelationByParent(doctorList DL, string str);
 void showCountRelationAllParent(doctorList DL);
 int countRelationByChild(doctorList DL, patientList PL, string nik);
 int countChildHaveNotRelationship(patientList PL, doctorList DL);
+void relationDeleteFirst(doctorList DL, relationAddress P);
+void relationDeleteLast(doctorList DL, relationAddress P);
+void relationDeleteAfter(doctorList DL, relationAddress prec, relationAddress P);
+void changeRelationToPatient(doctorList parent, string str, patientList child, string nik, string new_nik);
 
 #endif // TUBES-HEADER_H_INCLUDED

@@ -473,6 +473,26 @@ relationAddress findRelation(doctorList parent, string str, patientList child, s
 
 void deleteRelation(doctorList parent, string str, patientList child, string nik)
 {
+    doctorAddress d = first(parent);
+    relationAddress P = findRelation(parent, str, child, nik);
+
+    if (P != NULL)
+    {
+        if (P == relation(d)) // delete first
+        {
+            relationDeleteFirst(parent, P);
+        }
+        else if (next(P) == NULL) // delete last
+        {
+            relationDeleteLast(parent, P);
+        }
+        else // delete after
+        {
+            relationAddress prec = P;
+            relationDeleteAfter(parent, prec, P);
+        }
+        P = NULL;
+    }
 }
 
 int countRelationByParent(doctorList DL, string str)
@@ -568,4 +588,99 @@ int countChildHaveNotRelationship(patientList PL, doctorList DL)
     }
 
     return counter;
+}
+
+void relationDeleteFirst(doctorList DL, relationAddress P)
+{
+    doctorAddress d = first(DL);
+
+    if (d != NULL)
+    {
+        P = relation(d);
+        relation(d) = next(P);
+        next(P) = NULL;
+    }
+    else
+    {
+        P = NULL;
+        relation(d) = NULL;
+    }
+}
+
+void relationDeleteLast(doctorList DL, relationAddress P)
+{
+    doctorAddress d = first(DL);
+
+    while (d != NULL)
+    {
+        if (relation(d) != NULL)
+        {
+            if (next(relation(d)) == NULL)
+            {
+                P = relation(d);
+                relation(d) = NULL;
+            }
+            else
+            {
+                relationAddress temp = relation(d);
+                while (next(next(temp)) != NULL)
+                {
+                    temp = next(temp);
+                }
+                P = next(temp);
+                next(temp) = NULL;
+            }
+        }
+
+        d = next(d);
+    }
+}
+
+void relationDeleteAfter(doctorList DL, relationAddress prec, relationAddress P)
+{
+    relationAddress temp;
+
+    P = relation(first(DL));
+    while (P != NULL)
+    {
+        if (next(P) == prec)
+        {
+            temp = P;
+            break;
+        }
+        P = next(P);
+    }
+
+    next(temp) = next(prec);
+    prec = NULL;
+}
+
+void changeRelationToPatient(doctorList parent, string str, patientList child, string nik, string new_nik)
+{
+    doctorAddress da = findDoctor(parent, str);
+    patientAddress pa = findPatient(child, nik);
+    patientAddress pa_new = findPatient(child, nik);
+
+    if (da != NULL && pa != NULL && pa_new != NULL)
+    {
+        relationAddress ra = relation(da);
+
+        if (ra == NULL)
+        {
+            cout << "Relasi tidak ditemukan." << endl;
+        }
+        else
+        {
+            bool is_found = false;
+            while (ra != NULL && !is_found)
+            {
+                if (nextPatient(ra) == pa)
+                {
+                    nextPatient(ra) = pa_new;
+                    is_found = true;
+                }
+                ra = next(ra);
+            }
+        }
+    }
 }
