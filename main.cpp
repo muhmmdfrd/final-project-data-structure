@@ -7,167 +7,205 @@ int main()
     doctorList DL;
     createListDoctor(DL);
 
-    doctor d1 = doctor();
-    d1.name = "doctor 1";
-    d1.str = "str-01";
-    d1.speciality = "dentist";
-    d1.experiences_year = 10;
-    doctorAddress cd1 = createDoctor(d1);
-    insertDoctor(DL, cd1);
+    int n;
+    string find_str, find_nik;
 
-    doctor d2 = doctor();
-    d2.name = "doctor 2";
-    d2.str = "str-02";
-    d2.speciality = "fisio";
-    d2.experiences_year = 5;
-    insertDoctor(DL, createDoctor(d2));
+    cout << "masukkan jumlah dokter yang akan diinput: "; cin >> n;
 
-    doctor d3 = doctor();
-    d3.name = "doctor 3";
-    d3.str = "str-03";
-    d3.speciality = "bones";
-    d3.experiences_year = 3;
-    insertDoctor(DL, createDoctor(d3));
+    for (int i = 0; i < n; i++)
+    {
+        doctor d = doctor();
+        cout << "STR: "; cin >> d.str;
+        cout << "Nama: "; cin >> d.name;
+        cout << "Spesialisasi: "; cin >> d.speciality;
+        cout << "Pengalaman (tahun): "; cin >> d.experiences_year;
+        cout << endl;
+        insertDoctor(DL, createDoctor(d));
+    }
 
-    doctor d4 = doctor();
-    d4.name = "doctor 4";
-    d4.str = "str-04";
-    d4.speciality = "general";
-    d4.experiences_year = 2;
-    insertDoctor(DL, createDoctor(d4));
-
+    cout << "List dokter yang tersedia: " << endl;
     showDoctorList(DL);
-
-    doctorAddress da1 = findDoctor(DL, "str-02");
-
-//    if (da1 == NULL)
-//    {
-//        cout << "str-02 not found" << endl;
-//    }
-//    else
-//    {
-//        deleteDoctor(DL, da1);
-//    }
-
     cout << endl;
-    cout << "after delete str-02:" << endl;
-    showDoctorList(DL);
 
+    cout << "Cari dokter berdasarkan STR: "; cin >> find_str;
+    doctorAddress da = findDoctor(DL, find_str);
+
+    if (da == NULL)
+    {
+        cout << find_str << " tidak ditemukan." << endl;
+    }
+    else
+    {
+        cout << find_str << " ditemukan." << endl;
+    }
+    cout << endl;
+
+    cout << "Cari dokter yang akan dihapus berdasarkan STR: "; cin >> find_str;
+    da = findDoctor(DL, find_str);
+
+    if (da == NULL)
+    {
+        cout << find_str << " tidak ditemukan." << endl;
+    }
+    else
+    {
+        deleteDoctor(DL, da);
+        cout << find_str << " berhasil dihapus." << endl;
+    }
+    cout << endl;
+
+    cout << "List dokter yang tersedia: " << endl;
+    showDoctorList(DL);
     cout << endl;
 
     patientList PL;
     createListPatient(PL);
 
-    patient p1 = patient();
-    p1.nik = "nik-01";
-    p1.name = "patient 01";
-    p1.gender = 'L';
-    p1.age = 21;
-    insertPatient(PL, createPatient(p1));
+    cout << "masukkan jumlah pasien yang akan diinput: "; cin >> n;
 
-    patient p2 = patient();
-    p2.nik = "nik-02";
-    p2.name = "patient 02";
-    p2.gender = 'P';
-    p2.age = 31;
-    insertPatient(PL, createPatient(p2));
+    for (int i = 0; i < n; i++)
+    {
+        patient p = patient();
+        cout << "NIK: "; cin >> p.nik;
+        cout << "Name: "; cin >> p.name;
+        cout << "Gender: "; cin >> p.gender;
+        cout << "Umur: "; cin >> p.age;
+        cout << endl;
+        insertPatient(PL, createPatient(p));
+    }
 
-    patient p3 = patient();
-    p3.nik = "nik-03";
-    p3.name = "patient 03";
-    p3.gender = 'L';
-    p3.age = 18;
-    insertPatient(PL, createPatient(p3));
-
-    patient p4 = patient();
-    p4.nik = "nik-04";
-    p4.name = "patient 04";
-    p4.gender = 'P';
-    p4.age = 31;
-    insertPatient(PL, createPatient(p4));
-
-    patient p5 = patient();
-    p5.nik = "nik-05";
-    p5.name = "patient 05";
-    p5.gender = 'P';
-    p5.age = 69;
-    insertPatient(PL, createPatient(p5));
-
+    cout << "List pasien yang terdaftar: " << endl;
     showPatientList(PL);
-
-    patientAddress pa1 = findPatient(PL, "nik-02");
-
-//    if (pa1 == NULL)
-//    {
-//        cout << "nik-02 not found" << endl;
-//    }
-//    else
-//    {
-//        deletePatient(PL, pa1);
-//    }
-
-    cout << endl;
-    cout << "after delete nik-02:" << endl;
-    showPatientList(PL);
-
-    // insert relation
-    relationAddress cra = createRelation('A');
-    insertRelation(DL, "str-01", cra);
-    insertRelation(DL, "str-01", createRelation('B'));
-    insertRelation(DL, "str-01", createRelation('C'));
-
-    insertRelation(DL, "str-02", createRelation('D'));
-
-    insertRelation(DL, "str-04", createRelation('E'));
-    insertRelation(DL, "str-04", createRelation('F'));
-
-    doctor parent_1 = info(cd1);
-    cout << "relasi dari dokter dengan nama " << parent_1.name << ": " << endl;
-    showRelationFromParent(cd1);
-
-    connectToPatient(DL, "str-01", PL, "nik-03");
-    connectToPatient(DL, "str-01", PL, "nik-02");
-    connectToPatient(DL, "str-01", PL, "nik-01");
-
-    connectToPatient(DL, "str-02", PL, "nik-02");
-
-    connectToPatient(DL, "str-04", PL, "nik-05");
-    connectToPatient(DL, "str-04", PL, "nik-04");
-
-//    relationAddress rr = findRelation(DL, "str-01", PL, "nik-01");
-//
-//    cout << "hei " << info(rr) << endl;
-//
-//    cout << "jumlah: " << countRelationByParent(DL, "str-01");
-//
-//    showCountRelationAllParent(DL);
-//
-//    cout << "jumlah relasi child nik-01: " << countRelationByChild(DL, PL, "nik-01") << endl;
-
-    cout << "jumlah child tanpa relasi: " << countChildHaveNotRelationship(PL, DL) << endl;
-
-    showDoctorByPatient(DL, PL);
-
-    cout << "divider" << endl;
-
-    showDoctorByPatient(DL, PL, "nik-02");
-
-    relationAddress rara = findRelation(DL, "str-01", PL, "nik-02");
-
-    cout << info(rara) << endl;
-
-    deleteRelation(DL, "str-01", PL, "nik-02");
-
-    doctor parent_11 = info(cd1);
-    cout << "relasi dari dokter dengan nama " << parent_11.name << ": " << endl;
-
-    cout << "before: " << endl;
-    showDoctorByPatient(DL, PL);
     cout << endl;
 
-    changeRelationToPatient(DL, "str-04", PL, "nik-04", "nik-02");
+    cout << "Cari pasien berdasarkan NIK: "; cin >> find_nik;
+    patientAddress pa = findPatient(PL, find_nik);
 
-    cout << "after: " << endl;
-    showDoctorByPatient(DL, PL);
+    if (pa == NULL)
+    {
+        cout << find_nik << " tidak ditemukan." << endl;
+    }
+    else
+    {
+        cout << find_nik << " ditemukan." << endl;
+    }
+    cout << endl;
+
+    cout << "Cari pasien yang akan dihapus berdasarkan NIK: "; cin >> find_nik;
+    pa = findPatient(PL, find_nik);
+
+    if (pa == NULL)
+    {
+        cout << find_nik << " tidak ditemukan." << endl;
+    }
+    else
+    {
+        deletePatient(PL, pa);
+        cout << find_nik << " berhasil dihapus." << endl;
+    }
+    cout << endl;
+
+    cout << "List pasien yang terdaftar: " << endl;
+    showPatientList(PL);
+    cout << endl;
+
+    da = first(DL);
+    int m = 0;
+    int ascii = 65;
+    while (da != NULL)
+    {
+        cout << "masukkan jumlah relasi untuk dokter " << info(da).name << ": ";
+        cin >> m;
+
+        for (int i = 0; i < m; i++)
+        {
+            insertRelation(DL, info(da).str, createRelation(ascii));
+            ascii++;
+        }
+
+        da = next(da);
+    }
+    cout << endl;
+
+    da = first(DL);
+    while (da != NULL)
+    {
+        cout << "relasi dari dokter dengan nama " << info(da).name << ": " << endl;
+        showRelationFromParent(da);
+        cout << endl;
+        da = next(da);
+    }
+
+    da = first(DL);
+    int relation_count = 0;
+    while (da != NULL)
+    {
+        relation_count = countRelationByParent(DL, info(da).str);
+        for (int i = 0; i < relation_count; i++)
+        {
+            cout << "masukkan " << countRelationByParent(DL, info(da).str) << " NIK pasien untuk dokter " << info(da).name << " : ";
+            cin >> find_nik;
+
+            pa = findPatient(PL, find_nik);
+
+            if (pa == NULL)
+            {
+                cout << find_nik << " tidak ditemukan." << endl;
+            }
+            else
+            {
+                connectToPatient(DL, info(da).str, PL, info(pa).nik);
+            }
+        }
+        cout << endl;
+
+        da = next(da);
+    }
+
+    // belum fix
+    da = first(DL);
+    while (da != NULL)
+    {
+        cout << "dokter " << info(da).name << " memiliki pasien: " << endl;
+        showPatientFromDoctor(DL, info(da).str);
+        cout << endl;
+        da = next(da);
+    }
+
+////    relationAddress rr = findRelation(DL, "str-01", PL, "nik-01");
+////
+////    cout << "hei " << info(rr) << endl;
+////
+////    cout << "jumlah: " << countRelationByParent(DL, "str-01");
+////
+////    showCountRelationAllParent(DL);
+////
+////    cout << "jumlah relasi child nik-01: " << countRelationByChild(DL, PL, "nik-01") << endl;
+//
+//    cout << "jumlah child tanpa relasi: " << countChildHaveNotRelationship(PL, DL) << endl;
+//
+//    showDoctorByPatient(DL, PL);
+//
+//    cout << "divider" << endl;
+//
+//    showDoctorByPatient(DL, PL, "nik-02");
+//
+//    relationAddress rara = findRelation(DL, "str-01", PL, "nik-02");
+//
+//    cout << info(rara) << endl;
+//
+//    deleteRelation(DL, "str-01", PL, "nik-02");
+//
+//    doctor parent_11 = info(cd1);
+//    cout << "relasi dari dokter dengan nama " << parent_11.name << ": " << endl;
+//
+//    cout << "before: " << endl;
+//    showDoctorByPatient(DL, PL);
+//    cout << endl;
+//
+//    changeRelationToPatient(DL, "str-04", PL, "nik-04", "nik-02");
+//
+//    cout << "after: " << endl;
+//    showDoctorByPatient(DL, PL);
 }
 
