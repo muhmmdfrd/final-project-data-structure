@@ -283,7 +283,7 @@ void showDoctorByPatient(doctorList DL, patientList PL)
     {
         doctorAddress d = first(DL);
 
-        cout << "list doctor of patient " << info(p).name << ":" << endl;
+        cout << "Pasien " << info(p).name << " dirawat oleh dokter:" << endl;
         while (d != NULL)
         {
             patientOfThisDoctor = false;
@@ -300,12 +300,13 @@ void showDoctorByPatient(doctorList DL, patientList PL)
 
             if (patientOfThisDoctor)
             {
-                cout << "- "<< info(d).name << endl;
+                cout << info(d).str << " " << info(d).name << " " << info(d).speciality << " " << info(d).experiences_year << endl;
             }
 
             d = next(d);
         }
 
+        cout << endl;
 
         p = next(p);
     }
@@ -323,7 +324,7 @@ void showDoctorByPatient(doctorList DL, patientList PL, string nik)
     }
 
     doctorAddress d = first(DL);
-    cout << "list doctor of patient " << info(p).name << ":" << endl;
+    cout << "Pasien " << info(p).name << " dirawat oleh: " << endl;
     while (d != NULL)
     {
         patientOfThisDoctor = false;
@@ -340,7 +341,7 @@ void showDoctorByPatient(doctorList DL, patientList PL, string nik)
 
         if (patientOfThisDoctor)
         {
-            cout << "- "<< info(d).name << endl;
+            cout << info(d).str << " " << info(d).name << " " << info(d).speciality << " " << info(d).experiences_year << endl;
         }
 
         d = next(d);
@@ -435,11 +436,10 @@ void showPatientFromDoctor(doctorList DL, string str)
         {
             patientAddress temp = nextPatient(p);
 
-            while (temp != NULL)
+            if (temp != NULL)
             {
                 patient data = info(temp);
                 cout << data.nik << " " << data.name << " " << data.gender << " " << data.age << endl;
-                temp = next(temp);
             }
             p = next(p);
         }

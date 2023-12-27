@@ -10,17 +10,25 @@ int main()
     int n;
     string find_str, find_nik;
 
-    cout << "masukkan jumlah dokter yang akan diinput: "; cin >> n;
+    cout << "Masukkan jumlah dokter yang akan diinput: "; cin >> n;
 
     for (int i = 0; i < n; i++)
     {
+        // ini ntar hapus
         doctor d = doctor();
-        cout << "STR: "; cin >> d.str;
-        cout << "Nama: "; cin >> d.name;
-        cout << "Spesialisasi: "; cin >> d.speciality;
-        cout << "Pengalaman (tahun): "; cin >> d.experiences_year;
-        cout << endl;
+        d.str = "str-0" + to_string(i + 1);
+        d.name = "D" + to_string(i + 1);
+        d.speciality = "A";
+        d.experiences_year = 10 + i;
         insertDoctor(DL, createDoctor(d));
+        // ntar un-comment
+//        doctor d = doctor();
+//        cout << "STR: "; cin >> d.str;
+//        cout << "Nama: "; cin >> d.name;
+//        cout << "Spesialisasi: "; cin >> d.speciality;
+//        cout << "Pengalaman (tahun): "; cin >> d.experiences_year;
+//        cout << endl;
+//        insertDoctor(DL, createDoctor(d));
     }
 
     cout << "List dokter yang tersedia: " << endl;
@@ -61,17 +69,24 @@ int main()
     patientList PL;
     createListPatient(PL);
 
-    cout << "masukkan jumlah pasien yang akan diinput: "; cin >> n;
+    cout << "Masukkan jumlah pasien yang akan diinput: "; cin >> n;
 
     for (int i = 0; i < n; i++)
     {
+        // ini juga ntar hapus
         patient p = patient();
-        cout << "NIK: "; cin >> p.nik;
-        cout << "Name: "; cin >> p.name;
-        cout << "Gender: "; cin >> p.gender;
-        cout << "Umur: "; cin >> p.age;
-        cout << endl;
+        p.nik = "nik-0" + to_string(i + 1);
+        p.name = "M" + to_string(i + 1);
+        p.gender = 'L';
+        p.age = 20 + i;
         insertPatient(PL, createPatient(p));
+//        patient p = patient();
+//        cout << "NIK: "; cin >> p.nik;
+//        cout << "Name: "; cin >> p.name;
+//        cout << "Gender: "; cin >> p.gender;
+//        cout << "Umur: "; cin >> p.age;
+//        cout << endl;
+//        insertPatient(PL, createPatient(p));
     }
 
     cout << "List pasien yang terdaftar: " << endl;
@@ -114,7 +129,7 @@ int main()
     int ascii = 65;
     while (da != NULL)
     {
-        cout << "masukkan jumlah relasi untuk dokter " << info(da).name << ": ";
+        cout << "Masukkan jumlah relasi untuk dokter " << info(da).name << ": ";
         cin >> m;
 
         for (int i = 0; i < m; i++)
@@ -162,7 +177,6 @@ int main()
         da = next(da);
     }
 
-    // belum fix
     da = first(DL);
     while (da != NULL)
     {
@@ -172,10 +186,26 @@ int main()
         da = next(da);
     }
 
-////    relationAddress rr = findRelation(DL, "str-01", PL, "nik-01");
-////
-////    cout << "hei " << info(rr) << endl;
-////
+    showDoctorByPatient(DL, PL);
+
+    cout << endl;
+
+    cout << "Mencari relasi pasien dan dokter" << endl;
+    cout << "Masukkan STR: "; cin >> find_str;
+    cout << "Masukkan NIK: "; cin >> find_nik;
+
+    relationAddress relation_dp = findRelation(DL, find_str, PL, find_nik);
+
+    if (relation_dp == NULL)
+    {
+        cout << "Tidak ada relasi antara STR " << find_str << " dengan NIK " << find_nik << endl;
+    }
+    else
+    {
+        patientAddress pa = nextPatient(relation_dp);
+        showDoctorByPatient(DL, PL, info(pa).nik);
+    }
+
 ////    cout << "jumlah: " << countRelationByParent(DL, "str-01");
 ////
 ////    showCountRelationAllParent(DL);
