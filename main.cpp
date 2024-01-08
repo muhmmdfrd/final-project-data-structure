@@ -14,21 +14,13 @@ int main()
 
     for (int i = 0; i < n; i++)
     {
-        // ini ntar hapus
         doctor d = doctor();
-        d.str = "str-0" + to_string(i + 1);
-        d.name = "D" + to_string(i + 1);
-        d.speciality = "A";
-        d.experiences_year = 10 + i;
-        insertDoctor(DL, createDoctor(d));
-        // ntar un-comment
-//        doctor d = doctor();
-//        cout << "STR: "; cin >> d.str;
-//        cout << "Nama: "; cin >> d.name;
-//        cout << "Spesialisasi: "; cin >> d.speciality;
-//        cout << "Pengalaman (tahun): "; cin >> d.experiences_year;
-//        cout << endl;
-//        insertDoctor(DL, createDoctor(d));
+        cout << "str: "; cin >> d.str;
+        cout << "nama: "; cin >> d.name;
+        cout << "spesialisasi: "; cin >> d.speciality;
+        cout << "pengalaman (tahun): "; cin >> d.experiences_year;
+        cout << endl;
+        insertdoctor(dl, createdoctor(d));
     }
 
     cout << "List dokter yang tersedia: " << endl;
@@ -73,20 +65,13 @@ int main()
 
     for (int i = 0; i < n; i++)
     {
-        // ini juga ntar hapus
         patient p = patient();
-        p.nik = "nik-0" + to_string(i + 1);
-        p.name = "M" + to_string(i + 1);
-        p.gender = 'L';
-        p.age = 20 + i;
+        cout << "NIK: "; cin >> p.nik;
+        cout << "Name: "; cin >> p.name;
+        cout << "Gender: "; cin >> p.gender;
+        cout << "Umur: "; cin >> p.age;
+        cout << endl;
         insertPatient(PL, createPatient(p));
-//        patient p = patient();
-//        cout << "NIK: "; cin >> p.nik;
-//        cout << "Name: "; cin >> p.name;
-//        cout << "Gender: "; cin >> p.gender;
-//        cout << "Umur: "; cin >> p.age;
-//        cout << endl;
-//        insertPatient(PL, createPatient(p));
     }
 
     cout << "List pasien yang terdaftar: " << endl;
