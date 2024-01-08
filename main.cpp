@@ -156,7 +156,8 @@ int main()
     while (da != NULL)
     {
         relation_count = countRelationByParent(DL, info(da).str);
-        for (int i = 0; i < relation_count; i++)
+        int i = 0;
+        while (i < relation_count)
         {
             cout << "masukkan " << countRelationByParent(DL, info(da).str) << " NIK pasien untuk dokter " << info(da).name << " : ";
             cin >> find_nik;
@@ -165,11 +166,12 @@ int main()
 
             if (pa == NULL)
             {
-                cout << find_nik << " tidak ditemukan." << endl;
+                cout << find_nik << " tidak ditemukan. Silakan coba lagi" << endl;
             }
             else
             {
                 connectToPatient(DL, info(da).str, PL, info(pa).nik);
+                i++;
             }
         }
         cout << endl;
@@ -206,36 +208,51 @@ int main()
         showDoctorByPatient(DL, PL, info(pa).nik);
     }
 
-////    cout << "jumlah: " << countRelationByParent(DL, "str-01");
-////
-////    showCountRelationAllParent(DL);
-////
-////    cout << "jumlah relasi child nik-01: " << countRelationByChild(DL, PL, "nik-01") << endl;
-//
-//    cout << "jumlah child tanpa relasi: " << countChildHaveNotRelationship(PL, DL) << endl;
-//
-//    showDoctorByPatient(DL, PL);
-//
-//    cout << "divider" << endl;
-//
-//    showDoctorByPatient(DL, PL, "nik-02");
-//
-//    relationAddress rara = findRelation(DL, "str-01", PL, "nik-02");
-//
-//    cout << info(rara) << endl;
-//
-//    deleteRelation(DL, "str-01", PL, "nik-02");
-//
-//    doctor parent_11 = info(cd1);
-//    cout << "relasi dari dokter dengan nama " << parent_11.name << ": " << endl;
-//
-//    cout << "before: " << endl;
-//    showDoctorByPatient(DL, PL);
-//    cout << endl;
-//
-//    changeRelationToPatient(DL, "str-04", PL, "nik-04", "nik-02");
-//
-//    cout << "after: " << endl;
-//    showDoctorByPatient(DL, PL);
+    cout << endl;
+    showCountRelationAllParent(DL);
+    cout << endl;
+
+    pa = first(PL);
+    while (pa != NULL)
+    {
+        cout << "Jumlah relasi pasien dengan NIK " << info(pa).nik << " adalah " << countRelationByChild(DL, PL, info(pa).nik) << endl;
+        pa = next(pa);
+    }
+    cout << endl;
+
+    cout << "Jumlah pasien tanpa relasi: " << countChildHaveNotRelationship(PL, DL) << endl;
+
+    cout << endl;
+
+    cout << "Cari dan hapus relasi." << endl;
+    cout << "Masukkan STR: "; cin >> find_str;
+    cout << "Masukkan NIK: "; cin >> find_nik;
+
+    relationAddress relation = findRelation(DL, find_str, PL, find_nik);
+
+    if (relation == NULL)
+    {
+        cout << "Relasi tidak ditemukan." << endl;
+    }
+    else
+    {
+        deleteRelation(DL, find_str, PL, find_nik);
+        cout << "Data berhasil dihapus." << endl;
+    }
+
+    cout << endl;
+    showDoctorByPatient(DL, PL);
+
+    string dst_find_nik;
+
+    cout << "Bertukar pasien" << endl;
+    cout << "Masukkan STR: "; cin >> find_str;
+    cout << "Masukkan NIK asal: "; cin >> find_nik;
+    cout << "Masukkan NIK tujuan: "; cin >> dst_find_nik;
+
+    changeRelationToPatient(DL, find_str, PL, find_nik, dst_find_nik);
+
+    cout << endl << "Data setelah bertukar pasien: " << endl;
+    showDoctorByPatient(DL, PL);
 }
 

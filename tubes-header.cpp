@@ -520,7 +520,7 @@ void showCountRelationAllParent(doctorList DL)
     {
         doctor d = info(p);
         int counter = countRelationByParent(DL, d.str);
-        cout << d.str << " " << d.name << " " << d.speciality << " " << d.experiences_year << " (" << counter << ")"  << endl;
+        cout << d.str << " " << d.name << " " << d.speciality << " " << d.experiences_year << " mempunyai relasi sebanyak " << counter << endl;
         p = next(p);
     }
 }
@@ -679,7 +679,10 @@ void changeRelationToPatient(doctorList parent, string str, patientList child, s
                     nextPatient(ra) = pa_new;
                     is_found = true;
                 }
-                ra = next(ra);
+                else
+                {
+                    ra = next(ra);
+                }
             }
         }
     }
