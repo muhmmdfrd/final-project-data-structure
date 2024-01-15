@@ -659,7 +659,7 @@ void changeRelationToPatient(doctorList parent, string str, patientList child, s
 {
     doctorAddress da = findDoctor(parent, str);
     patientAddress pa = findPatient(child, nik);
-    patientAddress pa_new = findPatient(child, nik);
+    patientAddress pa_new = findPatient(child, new_nik); // Corrected to use new_nik
 
     if (da != NULL && pa != NULL && pa_new != NULL)
     {
@@ -684,6 +684,12 @@ void changeRelationToPatient(doctorList parent, string str, patientList child, s
                     ra = next(ra);
                 }
             }
+
+            if (!is_found)
+            {
+                cout << "Relasi tidak ditemukan." << endl;
+            }
         }
     }
 }
+

@@ -20,7 +20,7 @@ int main()
         cout << "spesialisasi: "; cin >> d.speciality;
         cout << "pengalaman (tahun): "; cin >> d.experiences_year;
         cout << endl;
-        insertdoctor(dl, createdoctor(d));
+        insertDoctor(DL, createDoctor(d));
     }
 
     cout << "List dokter yang tersedia: " << endl;
